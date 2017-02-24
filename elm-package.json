@@ -1,0 +1,16 @@
+{
+    "version": "1.0.0",
+    "summary": "Helpers for comparing non-comparable values",
+    "repository": "https://github.com/TSFoster/elm-compare.git",
+    "license": "MIT",
+    "source-directories": [
+        "src"
+    ],
+    "exposed-modules": [
+        "Compare"
+    ],
+    "dependencies": {
+        "elm-lang/core": "5.1.1 <= v < 6.0.0"
+    },
+    "elm-version": "0.18.0 <= v < 0.19.0"
+}
