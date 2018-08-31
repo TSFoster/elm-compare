@@ -3,7 +3,7 @@
     "name": "TSFoster/elm-compare",
     "summary": "Helpers for comparing non-comparable values",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "exposed-modules": [
         "Compare"
     ],
