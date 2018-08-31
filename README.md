@@ -20,6 +20,7 @@ import Compare exposing (thenBy, thenByReverse, ascending, descending)
 
 winner =
     let
+        compare : Player -> Player -> Basics.Order
         compare =
             Compare.by .pokerSkill thenBy .cardShufflingAbility ascending
     in
