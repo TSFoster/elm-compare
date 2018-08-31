@@ -1,18 +1,14 @@
-module Compare
-    exposing
-        ( by
-        , with
-        , thenBy
-        , thenWith
-        , thenByReverse
-        , thenWithReverse
-        , ascending
-        , descending
-        )
+module Compare exposing
+    ( by
+    , thenBy, thenByReverse
+    , ascending, descending
+    , with, thenWith, thenWithReverse
+    )
 
 {-| DSL for creating compare functions
 
 This small module provides a concise DSL for creating comparison functions.
+
 
 # Comparisons by value
 
@@ -26,6 +22,7 @@ Oftentimes, you will be able to convert a value to another, comparable, value. `
     [ "James Joyce", "Bill Bryson" ]
 
 @docs by
+
 
 # If comparing by the first value does not create a definitive order, comparisons can be chained with `thenBy` and `thenByReverse`. A typical example would be sorting an address book by last name then first name:
 
@@ -72,35 +69,30 @@ If converting values to comparable types alone is not enough, arbitrary comparis
     ...     }
     LT
 
-
 @docs with, thenWith, thenWithReverse
 
 -}
 
 
-{-|
--}
+{-| -}
 by : (a -> comparable) -> ((a -> a -> Order) -> b) -> b
 by fn =
     with (comp fn)
 
 
-{-|
--}
+{-| -}
 with : (a -> a -> Order) -> ((a -> a -> Order) -> b) -> b
 with fn next =
     next fn
 
 
-{-|
--}
+{-| -}
 thenBy : (a -> a -> Order) -> (a -> comparable) -> ((a -> a -> Order) -> b) -> b
 thenBy ord fn =
     thenWith ord (comp fn)
 
 
-{-|
--}
+{-| -}
 thenWith : (a -> a -> Order) -> (a -> a -> Order) -> ((a -> a -> Order) -> b) -> b
 thenWith ord fn next =
     next <|
@@ -113,15 +105,13 @@ thenWith ord fn next =
                     order
 
 
-{-|
--}
+{-| -}
 thenByReverse : (a -> a -> Order) -> (a -> comparable) -> ((a -> a -> Order) -> b) -> b
 thenByReverse ord fn =
     thenWithReverse ord (comp fn)
 
 
-{-|
--}
+{-| -}
 thenWithReverse : (a -> a -> Order) -> (a -> a -> Order) -> ((a -> a -> Order) -> b) -> b
 thenWithReverse ord fn next =
     next <|
@@ -134,15 +124,13 @@ thenWithReverse ord fn next =
                     order
 
 
-{-|
--}
+{-| -}
 ascending : (a -> a -> Order) -> a -> a -> Order
 ascending fn a b =
     fn a b
 
 
-{-|
--}
+{-| -}
 descending : (a -> a -> Order) -> a -> a -> Order
 descending fn a b =
     fn b a
