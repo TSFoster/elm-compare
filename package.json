@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "test": "rm -rf tests/VerifyExamples && elm-format --validate . && elm-verify-examples && elm-test"
+  },
+  "dependencies": {
+    "elm": "^0.19.0-no-deps",
+    "elm-format": "^0.8.1",
+    "elm-test": "^0.19.0-rev6",
+    "elm-verify-examples": "^4.0.0"
+  }
+}
