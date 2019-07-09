@@ -4,7 +4,6 @@ DSL for creating comparison functions in [Elm][elmlang].
 
 [elmlang]: http://elm-lang.org/
 
-
 ## Usage
 
 Install the package:
@@ -24,13 +23,13 @@ winner =
         compare =
             Compare.by .pokerSkill thenBy .cardShufflingAbility ascending
     in
-        case compare player opponent of
-            EQ ->
-                Nothing
-            LT ->
-                Just opponent
-            GT ->
-                Just player
+    case compare player opponent of
+        EQ ->
+            Nothing
+        LT ->
+            Just opponent
+        GT ->
+            Just player
 
 
 rankings =
@@ -48,7 +47,6 @@ addressBook =
 For full documentation, see [package.elm-lang.org][package-doc].
 
 [package-doc]: http://package.elm-lang.org/packages/TSFoster/elm-compare/latest
-
 
 # [Tests](/tests)
 
