@@ -1,9 +1,9 @@
-module Tests exposing (..)
+module Tests exposing (Record, all, record, record1, record2)
 
-import Test exposing (..)
-import Expect
-import Fuzz exposing (Fuzzer, list, int, string, tuple)
 import Compare exposing (..)
+import Expect
+import Fuzz exposing (Fuzzer, int, list, string, tuple)
+import Test exposing (..)
 
 
 record : Fuzzer Record
@@ -40,15 +40,15 @@ all =
         [ describe "Basics"
             [ test "Can compare records with Compare.by" <|
                 \() ->
-                    (by .hello descending) record1 record2
+                    by .hello descending record1 record2
                         |> Expect.equal EQ
             , test "Can chain comparisons with Compare.thenBy" <|
                 \() ->
-                    (by .hello thenBy .world ascending) record1 record2
+                    by .hello thenBy .world ascending record1 record2
                         |> Expect.equal LT
             , test "Can chain comparisons with multiple Compare.thenBy" <|
                 \() ->
-                    (by .hello thenBy .world thenBy .bang ascending) record1 record2
+                    by .hello thenBy .world thenBy .bang ascending record1 record2
                         |> Expect.equal LT
             ]
         , describe "Ascending and descending"
@@ -58,15 +58,15 @@ all =
                         sort =
                             by .hello thenBy .world thenBy .bang
                     in
-                        List.sortWith (sort ascending) records
-                            |> List.reverse
-                            |> Expect.equal (List.sortWith (sort descending) records)
+                    List.sortWith (sort ascending) records
+                        |> List.reverse
+                        |> Expect.equal (List.sortWith (sort descending) records)
             ]
         , describe "Reverse"
             [ fuzz (tuple ( record, record )) "thenByReverse sorts in opposite order to thenBy" <|
                 \( a, b ) ->
-                    (Compare.with (always <| always EQ) thenBy .hello ascending) a b
+                    Compare.with (always <| always EQ) thenBy .hello ascending a b
                         |> Expect.equal
-                            ((Compare.with (always <| always EQ) thenByReverse .hello descending) a b)
+                            (Compare.with (always <| always EQ) thenByReverse .hello descending a b)
             ]
         ]
